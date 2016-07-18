@@ -1,0 +1,56 @@
+﻿<Page
+    x:Class="AdebtlyAdaptiveChallenge.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AdebtlyAdaptiveChallenge"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:AdebtlyAdaptiveChallenge.model"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <DataTemplate x:Key="GridViewItemTemplate" x:DataType="data:NewsItem">
+            <StackPanel Margin="20" HorizontalAlignment="Stretch">
+                <Image Source="{x:Bind Image}" HorizontalAlignment="Center" Width="300"/>
+                <TextBlock Text="{x:Bind Headline}" HorizontalAlignment="Center" FontSize="16" />
+                <TextBlock Text="{x:Bind Subhead}" HorizontalAlignment="Center" FontSize="11"/>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Button Grid.Row="0" Grid.Column="0" FontFamily="Segoe MDL2 assets" Content="&#xE700;" FontSize="24" Click="Button_Click"/>
+        <TextBlock Grid.Row="0" Grid.Column="1" FontSize="24" FontWeight="Bold" Text="TitleText" Name="pageTitleText" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+        <AutoSuggestBox Grid.Row="0" Grid.Column="1" Width="200" HorizontalAlignment="Right" PlaceholderText="Search" BorderBrush="Gray" BorderThickness="2" Name="autoSuggestbox" />
+        <SplitView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" OpenPaneLength="150" CompactPaneLength="44" Name="hamburgerSplitview" DisplayMode="CompactOverlay">
+            <SplitView.Pane>
+                <ListView SelectionChanged="ListView_SelectionChanged" Name="hamburgerListView">
+                    <ListViewItem Name="financialitem">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 assets" FontSize="24" Text="&#xE80F;"/>
+                            <TextBlock Text="Financial" FontSize="24" Margin="10,0,0,0"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Name="foodItem">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 assets" FontSize="24" Text="&#xE1CE;"/>
+                            <TextBlock Text="Food" FontSize="24" Margin="10,0,0,0"/>
+                        </StackPanel>
+                    </ListViewItem>
+                </ListView>
+            </SplitView.Pane>
+            <SplitView.Content>
+                <!--<Frame Name="mainContentFrame"/>-->
+                <GridView Name="ContentGridView" ItemTemplate="{StaticResource GridViewItemTemplate}" IsItemClickEnabled="True" ItemClick="ContentGridView_ItemClick" HorizontalAlignment="Stretch" />
+            </SplitView.Content>
+        </SplitView>
+    </Grid>
+</Page>
