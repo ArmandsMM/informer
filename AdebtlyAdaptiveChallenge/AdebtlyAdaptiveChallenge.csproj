@@ -100,6 +100,9 @@
     </Compile>
     <Compile Include="model\NewsItem.cs" />
     <Compile Include="model\NewsItemManager.cs" />
+    <Compile Include="NewsItemDataTemplate.xaml.cs">
+      <DependentUpon>NewsItemDataTemplate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +139,10 @@
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="NewsItemDataTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

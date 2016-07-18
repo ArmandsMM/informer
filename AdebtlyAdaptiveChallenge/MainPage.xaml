@@ -10,11 +10,7 @@
 
     <Page.Resources>
         <DataTemplate x:Key="GridViewItemTemplate" x:DataType="data:NewsItem">
-            <StackPanel Margin="20" HorizontalAlignment="Stretch">
-                <Image Source="{x:Bind Image}" HorizontalAlignment="Center" Width="300"/>
-                <TextBlock Text="{x:Bind Headline}" HorizontalAlignment="Center" FontSize="16" />
-                <TextBlock Text="{x:Bind Subhead}" HorizontalAlignment="Center" FontSize="11"/>
-            </StackPanel>
+            <local:NewsItemDataTemplate HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
         </DataTemplate>
     </Page.Resources>
 
