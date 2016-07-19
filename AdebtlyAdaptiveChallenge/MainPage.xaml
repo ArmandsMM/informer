@@ -12,7 +12,18 @@
         <DataTemplate x:Key="GridViewItemTemplate" x:DataType="data:NewsItem">
             <local:NewsItemDataTemplate HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
         </DataTemplate>
+        
+        <Style TargetType="AutoSuggestBox"  x:Key="autoSuggestBoxStyle">
+            <Setter Property="Width"  Value="200"/>
+            <Setter Property="HorizontalAlignment"  Value="Right"/>
+            <Setter Property="BorderBrush"  Value="Gray"/>
+            <Setter Property="BorderThickness"  Value="2"/>
+            <Setter Property="Margin" Value="0,0,10,0" />
+            <Setter Property="Visibility" Value="Visible" />
+        </Style>
     </Page.Resources>
+
+    
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.ColumnDefinitions>
@@ -23,9 +34,33 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="mobile">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="autosuggestbox.Visibility" Value="Collapsed" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="desktop">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="600"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="autosuggestbox.Visibility" Value="Visible" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        
         <Button Grid.Row="0" Grid.Column="0" FontFamily="Segoe MDL2 assets" Content="&#xE700;" FontSize="24" Click="Button_Click"/>
         <TextBlock Grid.Row="0" Grid.Column="1" FontSize="24" FontWeight="Bold" Text="TitleText" Name="pageTitleText" HorizontalAlignment="Left" Margin="10,0,0,0"/>
-        <AutoSuggestBox Grid.Row="0" Grid.Column="1" Width="200" HorizontalAlignment="Right" PlaceholderText="Search" BorderBrush="Gray" BorderThickness="2" Name="autoSuggestbox" />
+
+        <AutoSuggestBox Grid.Row="0" Grid.Column="1" Style="{StaticResource autoSuggestBoxStyle}" PlaceholderText="search" Name="autosuggestbox" />
+
         <SplitView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" OpenPaneLength="150" CompactPaneLength="44" Name="hamburgerSplitview" DisplayMode="CompactOverlay">
             <SplitView.Pane>
                 <ListView SelectionChanged="ListView_SelectionChanged" Name="hamburgerListView">

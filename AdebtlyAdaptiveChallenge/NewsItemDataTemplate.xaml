@@ -10,10 +10,37 @@
     d:DesignWidth="400">
 
 
-        <StackPanel Margin="20" HorizontalAlignment="Stretch">
-            <Image Source="{x:Bind NewsItem.Image}" HorizontalAlignment="Center" Width="300"/>
-            <TextBlock Text="{x:Bind NewsItem.Headline}" HorizontalAlignment="Center" FontSize="16" />
-            <TextBlock Text="{x:Bind NewsItem.Subhead}" HorizontalAlignment="Center" FontSize="11"/>
-        </StackPanel>
+    <StackPanel Margin="20" HorizontalAlignment="Stretch">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="mobile">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="newsItemImage.Width" Value="400" />
+                        <Setter Target="newsItemImage.Height" Value="275" />
+                        <Setter Target="newsItemHeadlineTextblock.FontSize" Value="18" />
+                        <Setter Target="newsItemSubheadTextBlock.FontSize" Value="11" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="desktop">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="600"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="newsItemImage.Width" Value="550" />
+                        <Setter Target="newsItemImage.Height" Value="400" />
+                        <Setter Target="newsItemHeadlineTextblock.FontSize" Value="26" />
+                        <Setter Target="newsItemSubheadTextBlock.FontSize" Value="16" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+            
+        <Image Source="{x:Bind NewsItem.Image}" HorizontalAlignment="Center" Width="300" Name="newsItemImage"/>
+        <TextBlock Text="{x:Bind NewsItem.Headline}" HorizontalAlignment="Center" FontSize="16" Name="newsItemHeadlineTextblock" />
+        <TextBlock Text="{x:Bind NewsItem.Subhead}" HorizontalAlignment="Center" FontSize="11" Name="newsItemSubheadTextBlock"/>
+    </StackPanel>
 
 </UserControl>
